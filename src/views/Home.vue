@@ -9,7 +9,7 @@
     </div>
     <GitHubInput />
     <AppFileDrop />
-    <TestCard />
+    <!-- <TestCard /> -->
     <!-- <AppButton @click="testBeCall">Test Backend</AppButton>
   <br />
   <AppButton @click="handleLogOut">Log out</AppButton> -->
