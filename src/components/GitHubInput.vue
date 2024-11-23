@@ -17,6 +17,7 @@ import AppButton from '@/components/AppButton.vue'
 import API from '@/api/axiosInstance.js'
 import { bottomAlert } from '@/store/bottomAlert.js'
 import csv from '@/store/fileDrop.js'
+import router from '@/router/index.js'
 
 export default {
   name: 'GitHubInput',
@@ -33,6 +34,7 @@ export default {
           link: this.gitHubLinkInput,
           content: csv.text
         })
+        router.push('/dashboard')
         bottomAlert.openAsSuccess(
           'Codebase has been sent for penetration testing'
         )

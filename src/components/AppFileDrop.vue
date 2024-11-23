@@ -2,8 +2,8 @@
   <h3 class="mb-2 text-slate-200 font-semibold">Detected vulnerabilities</h3>
   <div
     :class="[
-      'bg-slate-900 px-12 w-1/2 py-8 mb-4 flex items-center justify-center border-2 border-dashed border-slate-500 rounded-lg',
-      hasFile ? 'border-emerald-500 text-emerald-400' : ''
+      'bg-slate-900 px-12 w-1/2 py-8 mb-4 flex items-center justify-center border-2 border-dashed  rounded-lg',
+      hasFile ? 'border-emerald-500 text-emerald-400' : 'border-slate-500'
     ]"
     @drop.prevent="handleFileDrop"
     @dragover.prevent

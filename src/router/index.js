@@ -9,6 +9,11 @@ const routes = [
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: () => import('@/views/DashboardView.vue')
+      },
+      {
         path: '/home',
         name: 'home',
         component: () => import('@/views/Home.vue'),
@@ -38,14 +43,6 @@ const routes = [
         component: () => import('@/views/RegisterView.vue'),
         meta: {
           redirectIfSignedIn: true
-        }
-      },
-      {
-        path: '/dashboard',
-        name: 'dashboard',
-        component: () => import('@/views/DashboardView.vue'),
-        meta: {
-          requiresAuth: true
         }
       }
     ]

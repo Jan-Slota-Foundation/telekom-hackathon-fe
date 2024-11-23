@@ -9,7 +9,6 @@
     </div>
     <GitHubInput />
     <AppFileDrop />
-    <!-- <TestCard /> -->
     <!-- <AppButton @click="testBeCall">Test Backend</AppButton>
   <br />
   <AppButton @click="handleLogOut">Log out</AppButton> -->
@@ -20,7 +19,6 @@
 import AppButton from '@/components/AppButton.vue'
 import API from '@/api/axiosInstance.js'
 import GitHubInput from '@/components/GitHubInput.vue'
-import TestCard from '@/components/test/TestCard.vue'
 import AppFileDrop from '@/components/AppFileDrop.vue'
 import LoggedIn from '@/components/LoggedIn.vue'
 
@@ -28,7 +26,6 @@ export default {
   components: {
     AppButton,
     GitHubInput,
-    TestCard,
     AppFileDrop,
     LoggedIn
   },
