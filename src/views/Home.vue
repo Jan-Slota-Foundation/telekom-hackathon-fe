@@ -1,4 +1,5 @@
 <template>
+  <LoggedIn />
   <div class="flex flex-col items-center justify-center h-screen">
     <div class="mb-12 text-center">
       <h1 class="text-6xl font-semibold mb-2">Penetration Tester</h1>
@@ -7,6 +8,8 @@
       </h2>
     </div>
     <GitHubInput />
+    <AppFileDrop />
+    <TestCard />
     <!-- <AppButton @click="testBeCall">Test Backend</AppButton>
   <br />
   <AppButton @click="handleLogOut">Log out</AppButton> -->
@@ -17,11 +20,17 @@
 import AppButton from '@/components/AppButton.vue'
 import API from '@/api/axiosInstance.js'
 import GitHubInput from '@/components/GitHubInput.vue'
+import TestCard from '@/components/test/TestCard.vue'
+import AppFileDrop from '@/components/AppFileDrop.vue'
+import LoggedIn from '@/components/LoggedIn.vue'
 
 export default {
   components: {
     AppButton,
-    GitHubInput
+    GitHubInput,
+    TestCard,
+    AppFileDrop,
+    LoggedIn
   },
 
   methods: {
