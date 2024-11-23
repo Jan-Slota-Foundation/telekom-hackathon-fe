@@ -1,17 +1,27 @@
 <template>
-  <h1 class="text-4xl font-semibold">Penetration Tester</h1>
-  <AppButton @click="testBeCall">Test Backend</AppButton>
+  <div class="flex flex-col items-center justify-center h-screen">
+    <div class="mb-12 text-center">
+      <h1 class="text-6xl font-semibold mb-2">Penetration Tester</h1>
+      <h2 class="text-slate-400 uppercase tracking-wide font-medium">
+        Penetrate codebase in minutes
+      </h2>
+    </div>
+    <GitHubInput />
+    <!-- <AppButton @click="testBeCall">Test Backend</AppButton>
   <br />
-  <AppButton @click="handleLogOut">Log out</AppButton>
+  <AppButton @click="handleLogOut">Log out</AppButton> -->
+  </div>
 </template>
 
 <script>
 import AppButton from '@/components/AppButton.vue'
 import API from '@/api/axiosInstance.js'
+import GitHubInput from '@/components/GitHubInput.vue'
 
 export default {
   components: {
-    AppButton
+    AppButton,
+    GitHubInput
   },
 
   methods: {
