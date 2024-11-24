@@ -20,7 +20,7 @@ import { vulnerabilityStore } from '@/store/vulnerabilityStore'
       <div class="">
         <header class="mb-8">
           <h2 class="text-4xl mb-4 font-semibold tracking-wide">
-            {{ vulnerabilityStore?.selectedExploit?.category }}
+            {{ vulnerabilityStore?.selectedExploit?.category }} -
             {{ vulnerabilityStore?.selectedExploit?.items[0].Cwe }}
           </h2>
           <div class="">
@@ -33,7 +33,7 @@ import { vulnerabilityStore } from '@/store/vulnerabilityStore'
               <span class="block font-semibold text-slate-400"
                 >Checked by:
               </span>
-              <span class="">ChatGPT | AutoGPT | Zep</span>
+              <span class="">ChatGPT | AutoGPT | Zap</span>
             </div>
           </div>
         </header>
@@ -98,7 +98,7 @@ import { vulnerabilityStore } from '@/store/vulnerabilityStore'
             {{ formattedString }}
           </p>
         </div>
-        <div class="mb-6">
+        <!-- <div class="mb-6" @click="handle">
           <h5 class="font-semibold tracking-wide mb-2 cursor-pointer">
             <span class="flex gap-2">
               <svg
@@ -117,7 +117,7 @@ import { vulnerabilityStore } from '@/store/vulnerabilityStore'
               AutoGPT Report
             </span>
           </h5>
-        </div>
+        </div> -->
       </div>
       <AppSummarizeAi class="mt-auto" />
     </div>

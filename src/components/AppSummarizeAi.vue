@@ -1,3 +1,7 @@
+<script setup>
+import { vulnerabilityStore } from '../store/vulnerabilityStore'
+</script>
+
 <template>
   <form @submit.prevent="askAiToSummarize" class="flex gap-2 w-full">
     <AppButton type="submit">
@@ -45,7 +49,6 @@
 <script>
 import AppButton from './AppButton.vue'
 import API from '@/api/axiosInstance.js'
-import { vulnerabilityStore } from '../store/vulnerabilityStore'
 import { bottomAlert } from '../store/bottomAlert'
 import { rightSideStore } from '../store/rightSideStore.js'
 
@@ -58,7 +61,6 @@ export default {
 
   mounted() {
     this.inputQuestion = ''
-    this.aiResponseE = ''
   },
 
   data() {
@@ -75,21 +77,49 @@ export default {
       rightSideStore.type = 'question'
       rightSideStore.question = this.inputQuestion
       rightSideStore.response = null
-      try {
-        let aiResponse = await API.post('/askai', {
-          content: `You are an expert in the topic of ${vulnerabilityStore?.selectedExploit?.category} exploits. You are analyzing an application, and have found ${vulnerabilityStore?.selectedExploit?.items.length} exploits of this sort, they seem to be of ${vulnerabilityStore?.selectedExploit?.items[0].Severity} severity. Please answer the follwing question: "${this.inputQuestion}. Please be concise and limit yourself to 100 words." `
-        })
+      // try {
+      let aiResponse = await API.post('/askai', {
+        content: `You are an expert in the topic of ${
+          vulnerabilityStore?.selectedExploit?.category ||
+          vulnerabilityStore?.selectedExploit?.name ||
+          'No category available'
+        } exploits. You are analyzing an application, and have found ${
+          vulnerabilityStore?.selectedExploit?.items?.length ||
+          vulnerabilityStore?.selectedExploit?.count ||
+          'No count available'
+        } exploits of this sort, they seem to be of ${
+          (vulnerabilityStore?.selectedExploit?.items?.[0]?.Severity ??
+            false) ||
+          'decent'
+        } severity. Please answer the follwing question: "${
+          this.inputQuestion
+        }. Please be concise and limit yourself to 100 words. You also have some more context at hand, such as the description of the problem:
 
-        rightSideStore.response = aiResponse.data
-        this.isResponseLoading = false
-        this.inputQuestion = ''
-      } catch (error) {
-        // proper error handling
-        console.log(error)
-        bottomAlert.openAsError(
-          'An error has occured when communicating with the AI'
-        )
-      }
+          ${
+            vulnerabilityStore?.selectedExploit?.items?.[0]?.Description ||
+            vulnerabilityStore?.selectedExploit?.desc ||
+            'No description available'
+          }
+
+          Or the proposed solution to the problem:
+
+          ${
+            vulnerabilityStore?.selectedExploit?.solution ||
+            'No solution available'
+          }
+            `
+      })
+
+      rightSideStore.response = aiResponse.data
+      this.isResponseLoading = false
+      this.inputQuestion = ''
+      // } catch (error) {
+      //   // proper error handling
+      //   console.log(error)
+      //   bottomAlert.openAsError(
+      //     'An error has occured when communicating with the AI'
+      //   )
+      // }
     }
   }
 }

@@ -9,9 +9,9 @@
     </div>
     <GitHubInput />
     <AppFileDrop />
-    <!-- <AppButton @click="testBeCall">Test Backend</AppButton>
-  <br />
-  <AppButton @click="handleLogOut">Log out</AppButton> -->
+    <router-link to="/dashboard" class="underline mt-3 text-primary-600"
+      >See already uploaded data</router-link
+    >
   </div>
 </template>
 

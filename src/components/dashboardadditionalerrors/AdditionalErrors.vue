@@ -1,3 +1,7 @@
+<script setup>
+import { vulnerabilityStore } from '../../store/vulnerabilityStore'
+</script>
+
 <template>
   <div class="max-w-[21rem] border rounded-lg border-slate-500 p-2">
     <h3 class="text-center text-lg mb-4 text-primary-600 font-medium">
@@ -8,24 +12,35 @@
       <li
         v-for="(additionalCategory, index) in additionalCategories"
         :key="index"
-        class="bg-slate-800 flex justify-between text-sm rounded-lg py-2 px-4"
+        @click="activateAdditionalError(additionalCategory)"
+        :class="[
+          'bg-slate-800 items-center flex justify-between text-sm rounded-lg py-1 px-4',
+          additionalCategory.name === vulnerabilityStore?.selectedExploit?.name
+            ? 'border border-slate-500'
+            : 'border-transparent border'
+        ]"
       >
         <span class="text-sm truncate max-w-32">
           {{ additionalCategory.name }}
         </span>
         <span
           :class="[
+            ' py-1 rounded-full px-3 text-xs font-medium',
             additionalCategory.riskdesc === 'Medium (Medium)'
-              ? 'bg-orange-700'
+              ? 'border-2 border-orange-700 text-orange-700'
               : '',
-            additionalCategory.riskdesc === 'High (Low)' ? 'bg-red-700' : '',
-            additionalCategory.riskdesc === 'Medium (High)' ? 'bg-red-600' : '',
+            additionalCategory.riskdesc === 'High (Low)'
+              ? 'border-2 border-red-700 text-red-700'
+              : '',
+            additionalCategory.riskdesc === 'Medium (High)'
+              ? 'border-2 border-red-600 text-red-600'
+              : '',
             additionalCategory.riskdesc === 'Low (Medium)'
-              ? 'bg-orange-400'
+              ? 'border-2 border-orange-400 text-orange-400'
               : ''
           ]"
         >
-          {{ additionalCategory.riskdesc }}
+          {{ additionalCategory.count }}
         </span>
       </li>
     </ul>
@@ -33,15 +48,11 @@
 </template>
 
 <script>
-import DashboardVulnerabilityGroup from '@/components/dashboard/DashboardVulnerabilityGroup.vue'
 import API from '@/api/axiosInstance.js'
-
 export default {
   name: 'AdditionalErros',
 
-  components: {
-    DashboardVulnerabilityGroup
-  },
+  components: {},
 
   async mounted() {
     this.getZepCheckedFiles()
@@ -73,6 +84,11 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+
+    activateAdditionalError(additionalLog) {
+      vulnerabilityStore.selectedExploit = additionalLog
+      console.log(vulnerabilityStore.selectedExploit)
     }
   },
 
