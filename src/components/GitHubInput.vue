@@ -30,14 +30,15 @@ export default {
   methods: {
     async sendGitHubLink() {
       try {
+        bottomAlert.openAsSuccess(
+          'Codebase has been sent for penetration testing'
+        )
         let postResponse = await API.post('/analyze', {
           link: this.gitHubLinkInput,
           content: csv.text
         })
+
         router.push('/dashboard')
-        bottomAlert.openAsSuccess(
-          'Codebase has been sent for penetration testing'
-        )
       } catch (error) {
         console.log(error)
         bottomAlert.openAsError(

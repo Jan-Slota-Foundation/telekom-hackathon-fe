@@ -1,12 +1,40 @@
 <template>
-  <span :class="['base', status]"> {{ count }} {{ status }} </span>
+  <span
+    @click="tryCollapse"
+    :class="['base', status, isDetailist ? 'text-md mb-2' : 'text-xs']"
+  >
+    {{ count }}
+    <span v-if="isDetailist">total vulnerabilites - </span>
+    <span v-if="isDetailist || !isCollapsed"> {{ status }}</span>
+    <span v-if="isDetailist"> danger</span>
+  </span>
 </template>
 
 <script>
 export default {
   name: 'TestCardChip',
 
+  data() {
+    return {
+      isCollapsed: true
+    }
+  },
+
+  methods: {
+    tryCollapse() {
+      console.log(this.isCollapsed, this.isDetailist)
+      if (!this.isDetailist) {
+        this.isCollapsed = !this.isCollapsed
+        console.log('collapse', this.isCollapsed)
+      }
+    }
+  },
+
   props: {
+    isDetailist: {
+      type: Boolean,
+      default: false
+    },
     status: {
       type: String,
       required: true
@@ -21,7 +49,7 @@ export default {
 
 <style scoped>
 .base {
-  @apply text-xs font-medium rounded-full px-3 py-1 border-2 max-h-7;
+  @apply font-medium inline-block rounded-full px-3 py-1 border-2;
 }
 
 .high {

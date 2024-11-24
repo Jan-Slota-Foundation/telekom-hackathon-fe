@@ -3,18 +3,24 @@ import { vulnerabilityStore } from '@/store/vulnerabilityStore'
 </script>
 <template>
   <div class="p-3">
+    <h1 class="text-primary-600 text-5xl font-semibold">Penetration Tester</h1>
+    <a href="">Static dependency analysis</a>
     <div
       v-if="!vulnerabilityStore.isLoaded"
-      class="w-screen fixed left-0 top-0 h-screen flex items-center justify-center"
+      class="w-screen bg-slate-800 fixed left-0 top-0 h-screen flex items-center justify-center"
     >
       <DashboardLoader />
     </div>
     <div class="flex gap-4">
-      <section class="">
+      <section class="flex flex-col gap-4">
         <DashboardExploitSelector />
+        <AdditionalErrors />
       </section>
-      <section>
+      <section class="min-w-[40rem]">
         <DetailistWindow />
+      </section>
+      <section class="max-w-[20rem]">
+        <SideCard />
       </section>
     </div>
   </div>
@@ -25,6 +31,8 @@ import DashboardLoader from '@/components/dashboard/DashboardLoader.vue'
 import API from '@/api/axiosInstance.js'
 import DashboardExploitSelector from '@/components/dashboard/DashboardExploitSelector.vue'
 import DetailistWindow from '@/components/dashboardDetailist/DetailistWindow.vue'
+import SideCard from '@/components/dashboardRight/SideCard.vue'
+import AdditionalErrors from '../components/dashboardadditionalerrors/AdditionalErrors.vue'
 
 export default {
   name: 'DashboardView',
@@ -32,7 +40,9 @@ export default {
   components: {
     DashboardLoader,
     DashboardExploitSelector,
-    DetailistWindow
+    DetailistWindow,
+    SideCard,
+    AdditionalErrors
   },
 
   async mounted() {
