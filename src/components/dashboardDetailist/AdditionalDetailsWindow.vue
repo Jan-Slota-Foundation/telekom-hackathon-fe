@@ -93,7 +93,7 @@ import { vulnerabilityStore } from '../../store/vulnerabilityStore'
         ></p>
       </div>
 
-      <div class="mb-6">
+      <div v-if="vulnerabilityStore?.selectedExploit?.solution" class="mb-6">
         <h5
           @click="toggleFixDescriptionOpen"
           class="font-semibold tracking-wide mb-2 cursor-pointer"

@@ -77,49 +77,43 @@ export default {
       rightSideStore.type = 'question'
       rightSideStore.question = this.inputQuestion
       rightSideStore.response = null
-      // try {
-      let aiResponse = await API.post('/askai', {
-        content: `You are an expert in the topic of ${
-          vulnerabilityStore?.selectedExploit?.category ||
-          vulnerabilityStore?.selectedExploit?.name ||
-          'No category available'
-        } exploits. You are analyzing an application, and have found ${
-          vulnerabilityStore?.selectedExploit?.items?.length ||
-          vulnerabilityStore?.selectedExploit?.count ||
-          'No count available'
-        } exploits of this sort, they seem to be of ${
-          (vulnerabilityStore?.selectedExploit?.items?.[0]?.Severity ??
-            false) ||
-          'decent'
-        } severity. Please answer the follwing question: "${
-          this.inputQuestion
-        }. Please be concise and limit yourself to 100 words. You also have some more context at hand, such as the description of the problem:
+      try {
+        let aiResponse = await API.post('/askai', {
+          content: `You are an expert in the topic of ${
+            vulnerabilityStore?.selectedExploit?.category ||
+            vulnerabilityStore?.selectedExploit?.name ||
+            'No category available'
+          } exploits. You are analyzing an application, and have found ${
+            vulnerabilityStore?.selectedExploit?.items?.length ||
+            vulnerabilityStore?.selectedExploit?.count ||
+            'No count available'
+          } exploits of this sort, they seem to be of ${
+            (vulnerabilityStore?.selectedExploit?.items?.[0]?.Severity ??
+              false) ||
+            'decent'
+          } severity. Please answer the follwing question: "${
+            this.inputQuestion
+          }. Please be concise and limit yourself to 100 words. You also have some more context at hand, such as the description of the problem:
 
-          ${
-            vulnerabilityStore?.selectedExploit?.items?.[0]?.Description ||
-            vulnerabilityStore?.selectedExploit?.desc ||
-            'No description available'
-          }
-
-          Or the proposed solution to the problem:
+          The proposed solution to the problem:
 
           ${
             vulnerabilityStore?.selectedExploit?.solution ||
             'No solution available'
           }
             `
-      })
+        })
 
-      rightSideStore.response = aiResponse.data
-      this.isResponseLoading = false
-      this.inputQuestion = ''
-      // } catch (error) {
-      //   // proper error handling
-      //   console.log(error)
-      //   bottomAlert.openAsError(
-      //     'An error has occured when communicating with the AI'
-      //   )
-      // }
+        rightSideStore.response = aiResponse.data
+        this.isResponseLoading = false
+        this.inputQuestion = ''
+      } catch (error) {
+        // proper error handling
+        console.log(error)
+        bottomAlert.openAsError(
+          'An error has occured when communicating with the AI'
+        )
+      }
     }
   }
 }

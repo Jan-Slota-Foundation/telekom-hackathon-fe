@@ -24,7 +24,7 @@ import { rightSideStore } from '@/store/rightSideStore.js'
     />
     <div v-if="rightSideStore.type === 'crawler'" class="">
       <h3 class="text-3xl font-semibold mb-5">AutoGPT Log</h3>
-      <ul class="flex flex-col gap-4">
+      <ul class="flex flex-col gap-4 mb-8">
         <li
           v-for="(crowlerStep, index) in rightSideStore.autoGptSteps"
           :key="index"
@@ -41,7 +41,9 @@ import { rightSideStore } from '@/store/rightSideStore.js'
         </li>
       </ul>
 
-      <AppButton></AppButton>
+      <AppButton @click="openReportPage" class="w-full py-3"
+        >Get report</AppButton
+      >
     </div>
   </div>
 </template>
@@ -59,6 +61,12 @@ export default {
     SideCardIcon,
     SideCardResponse,
     AppButton
+  },
+
+  methods: {
+    openReportPage() {
+      window.open('https://hiimmilan.dev/hacktelecom/rec.html', '_blank')
+    }
   }
 }
 </script>
